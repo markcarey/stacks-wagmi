@@ -13,15 +13,18 @@ import { useDebounce } from '../hooks/useDebounce'
 import { stringify } from '../utils/stringify'
 
 export function WriteContractPrepared() {
+  const abiPath = require('../utils/deployments/goerli/FinanceNFTFactory.json');
+  const addresses = require('../utils/deployments/goerli/addresses.json');
+
   const [tokenId, setTokenId] = useState('')
   const debouncedTokenId = useDebounce(tokenId)
 
   const { config } = usePrepareContractWrite({
-    ...wagmiContractConfig,
-    functionName: 'mint',
-    enabled: Boolean(debouncedTokenId),
-    args: [BigInt(debouncedTokenId)],
-  })
+    address: addresses.factoryAddress,
+    abi: abiPath.abi,
+    functionName: 'createFinanceNFT',
+    args: ["AI NFT WATERLOO", "AIWATER", "0x4312BD27ec7c6e758C6900AC34116d4F53A7E259", addresses.uri , addresses.registryAddress, addresses.tbaImplementationAddress ]
+  });
   const { write, data, error, isLoading, isError } = useContractWrite(config)
   const {
     data: receipt,

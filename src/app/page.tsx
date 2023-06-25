@@ -17,7 +17,8 @@ import { WatchPendingTransactions } from '../components/WatchPendingTransactions
 import { WriteContract } from '../components/WriteContract'
 import { WriteContractPrepared } from '../components/WriteContractPrepared'
 
-export default function Page() {
+export default async function Page() {
+
   return (
     <div>
       <h1>wagmi + Next.js</h1>
@@ -86,6 +87,8 @@ export default function Page() {
         <hr />
         <h2>Write Contract (Prepared)</h2>
         <WriteContractPrepared />
+
+        
       </Connected>
     </div>
   )
